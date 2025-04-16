@@ -1,0 +1,76 @@
+---
+// Aqui declaramos una propiedad
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+<!--TODO: Esto es la estructura del HMTL -->
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description"/>
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body class="bg-black text-white font-sans">
+		<!-- Header / Navbar -->
+		<header class="bg-gray-900 shadow-md">
+			<div class="container mx-auto flex items-center justify-between p-4">
+				<nav class="space-x-6">
+					<a href="/" class="hover:text-accent">Inicio</a>
+					<a href="/productos" class="hover:text-accent">Productos</a>
+					<a href="/carrito" class="hover:text-accent">Carrito</a>
+					<a href="/about" class="hover:text-accent">Contacto</a>
+				</nav>
+			</div>
+		</header>
+
+		<!-- Lo que se ponga aqui se mostrara en cada pagina con layout -->
+		<main class="container mx-auto px-4 py-8">
+			<!-- slot es para mostrar todo lo que se ponga entre <Layout> ... </Layout> -->
+			<slot />
+		</main>
+		
+		<footer class="bg-gray-800 text-center py-6 mt-12 text-sm text-gray-400">
+			<p>&copy; {new Date().getFullYear()} MiTienda. Todos los derechos reservados.</p>
+			<p>Desarrollado con 💻 Astro + Tailwind</p>
+		</footer>
+	</body>
+</html>
+
+<!--TODO: ESTOS SON ESTILOS GLOBALES -->
+<style is:global>
+
+	:root {
+		--accent: 136, 58, 234;
+		--accent-light: 224, 204, 250;
+		--accent-dark: 49, 10, 101;
+		--accent-gradient: linear-gradient(
+			45deg,
+			rgb(var(--accent)),
+			rgb(var(--accent-light)) 30%,
+			white 60%
+		);
+	}
+
+	html {
+		font-family: system-ui, sans-serif;
+		background-color: black;
+		color:white
+	}
+
+	body {
+		@apply grid place-content-center;
+	}
+
+
+	body > div{
+		@apply container;
+	}
+
+</style>
